@@ -1,16 +1,16 @@
-# This is a sample Python script.
+# Это пример скрипта Python.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Нажмите Shift+F10, чтобы выполнить его, или замените его своим кодом.
+# Нажмите Double Shift для поиска повсюду классов, файлов, окон инструментов, действий и настроек.
 
 
 def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    # Используйте точку останова в строке кода ниже для отладки вашего скрипта.
+    print(f'Hi, {name}')  # Нажмите Ctrl+F8, чтобы переключить точку останова.
 
 
-# Press the green button in the gutter to run the script.
+# Нажмите зеленую кнопку в желобе, чтобы запустить скрипт.
 if __name__ == '__main__':
     print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# См. справку PyCharm по адресу https://www.jetbrains.com/help/pycharm/
