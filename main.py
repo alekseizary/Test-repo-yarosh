@@ -103,7 +103,25 @@ try:
         time.sleep(2)
         #input.send_keys(Keys.ENTER)
 
+    ##################################Выбор элемента по индексу
+    # def selection_index(label, index, driver):
+    #
+    #     input_field = get_input_by_label(driver, '.filtersEditorForm', label)
+    #
+    #     input_field.click()
+    #     time.sleep(1)
+    #
+    #     type_object_dropdown = driver.find_element(By.CSS_SELECTOR,
+    #                                                '.ant-select-dropdown:not(.ant-select-dropdown-hidden)')
+    #
+    #     # Получаем значения полученного списка селекта
+    #     options = type_object_dropdown.find_elements(By.CSS_SELECTOR, '.ant-select-item-option')
+    #
+    #     # Выбираем второй элемент в списке 'Тип объекта'
+    #     options[index].click()
 
+
+    #ВВОДИМ ЗНАЧЕНИЯ В ПОЛЕ АДРЕС
     def process_address_field():
         try:
             print("Обрабатываем поле: Адрес")
@@ -156,11 +174,13 @@ try:
             return False
 
 
-    # Вводим значения в фильтр
+    # ВВОД ЗНАЧЕНИЙ В ФИЛЬТР
     # filtersEditorForm идентификатор формы ищем в детулз from
     filter_form_css_selector = '.filtersEditorForm'
     fill_select_by_label(driver, filter_form_css_selector, 'Марка ПУ', 'SA-94')
     ActionChains(driver).send_keys(Keys.ESCAPE ).perform()
+
+    #ЗАПУСК(вызов) ФУНКЦИИ ВВОД АДРЕСА
     process_address_field()
 
     #ActionChains(driver).send_keys(Keys.TAB).perform()
@@ -169,24 +189,12 @@ try:
     fill_select_by_label(driver, filter_form_css_selector, 'Филиал', '04')
     fill_select_by_label(driver, filter_form_css_selector, 'Предприятие', '03')
 
-    ActionChains(driver).send_keys(Keys.TAB).perform()
+    #ActionChains(driver).send_keys(Keys.TAB).perform()
 
-    # Ищем поле ввода Тип объекта (3-й аргумент)
-    # С 120 по 133 строки заполения селекта Тип объекта
-    input_field = get_input_by_label(driver, filter_form_css_selector, 'Тип объекта')
+    #################################Вызов функции заполнение селекта Тип объекта
+    selection_index('Тип объекта', 2, driver)
 
-    input_field.click()
-    time.sleep(1)
 
-    # Ищем выпадающий список селекта Тип объекта
-    # type_object_dropdown - переменная
-    type_object_dropdown = driver.find_element(By.CSS_SELECTOR, '.ant-select-dropdown:not(.ant-select-dropdown-hidden)')
-
-    # Получаем значения полученного списка селекта
-    options = type_object_dropdown.find_elements(By.CSS_SELECTOR, '.ant-select-item-option')
-
-    #Выбираем второй элемент в списке 'Тип объекта'
-    options[2].click()
 
     fill_select_by_label(driver, filter_form_css_selector, 'Тип ПУ', 'Теплосчетчик')
     fill_select_by_label(driver, filter_form_css_selector, 'Тип ТУ', 'ТЭ')
@@ -300,7 +308,7 @@ try:
     options[1].click()
 
 
-    # Кликаем по синей галке для применения выбранных значений в селектах фильтра
+    # КЛИКАЕМ ПО СИНЕЙ ГАЛКЕ для применения выбранных значений в селектах фильтра
     apply_button = wait.until(
         EC.presence_of_element_located(
             (By.CSS_SELECTOR,
