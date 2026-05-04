@@ -8,7 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-# Данные для авторизации
+#Данные для авторизации
 URL = 'http://10.5.121.74/login'
 USERNAME = 'predbill'
 PASSWORD = 'predbill'
@@ -40,7 +40,7 @@ try:
     driver.get('http://10.5.121.74/predbilling/meteringDevicesPredBill')
     print("✓ Открыт раздел Приборы учета")
 
-    # Ждем загрузки страницы и находим поле поиска "Поиск по номеру прибора учета"
+    # Находим поле поиска "Поиск по номеру прибора учета"
     search_field = wait.until(
         EC.presence_of_element_located(
             (By.CSS_SELECTOR,
@@ -102,24 +102,6 @@ try:
         option.click()
         time.sleep(2)
         #input.send_keys(Keys.ENTER)
-
-    ##################################Выбор элемента по индексу
-    # def selection_index(label, index, driver):
-    #
-    #     input_field = get_input_by_label(driver, '.filtersEditorForm', label)
-    #
-    #     input_field.click()
-    #     time.sleep(1)
-    #
-    #     type_object_dropdown = driver.find_element(By.CSS_SELECTOR,
-    #                                                '.ant-select-dropdown:not(.ant-select-dropdown-hidden)')
-    #
-    #     # Получаем значения полученного списка селекта
-    #     options = type_object_dropdown.find_elements(By.CSS_SELECTOR, '.ant-select-item-option')
-    #
-    #     # Выбираем второй элемент в списке 'Тип объекта'
-    #     options[index].click()
-
 
     #ВВОДИМ ЗНАЧЕНИЯ В ПОЛЕ АДРЕС
     def process_address_field():
@@ -189,11 +171,26 @@ try:
     fill_select_by_label(driver, filter_form_css_selector, 'Филиал', '04')
     fill_select_by_label(driver, filter_form_css_selector, 'Предприятие', '03')
 
-    #ActionChains(driver).send_keys(Keys.TAB).perform()
 
     #################################Вызов функции заполнение селекта Тип объекта
-    selection_index('Тип объекта', 2, driver)
+    #selection_index('Тип объекта', 2, driver)
 
+    # #########################ВЫБОР ЭЛЕМЕНТА СЕЛЕКТА ПО ИНДЕКСУ ###################
+    #def selection_index(label, index, driver):
+    ActionChains(driver).send_keys(Keys.TAB).perform()
+
+    input_field = get_input_by_label(driver, filter_form_css_selector, "Тип объекта")
+    input_field.click()
+    time.sleep(1)
+
+    type_object_dropdown = driver.find_element(By.CSS_SELECTOR,
+                                                   '.ant-select-dropdown:not(.ant-select-dropdown-hidden)')
+
+    # Получаем значения полученного списка селекта
+    options = type_object_dropdown.find_elements(By.CSS_SELECTOR, '.ant-select-item-option')
+
+    # Выбираем второй элемент в списке 'Тип объекта'
+    options[2].click()
 
 
     fill_select_by_label(driver, filter_form_css_selector, 'Тип ПУ', 'Теплосчетчик')
